@@ -7,16 +7,16 @@
 # ldd gsl_dgemm_BLAS > BLASldd.log
 # ./gsl_dgemm_BLAS BLAS.dat 32 4096 32
 #2
-ldd gsl_dgemm_BLAS64 > BLAS64ldd.log
-./gsl_dgemm_BLAS64 BLAS64.dat 32 4096 32
+# ldd gsl_dgemm_BLAS64 > BLAS64ldd.log
+# ./gsl_dgemm_BLAS64 BLAS64.dat 32 4096 32
 #3
-ldd gsl_dgemm_GSLCBLAS > GSLCBLASldd.log
-./gsl_dgemm_GSLCBLAS GSLCBLAS.dat 32 4096 32
+# ldd gsl_dgemm_GSLCBLAS > GSLCBLASldd.log
+# ./gsl_dgemm_GSLCBLAS GSLCBLAS.dat 32 4096 32
 #4
-ldd gsl_dgemm_PSBLAS > PSBLASldd.log
-./gsl_dgemm_PSBLAS PSBLAS.dat 32 4096 32
+# ldd gsl_dgemm_PSBLAS > PSBLASldd.log
+# ./gsl_dgemm_PSBLAS PSBLAS.dat 32 4096 32
 #5
-#export MEU_LD=$LD_LIBRARY_PATH
+# export MEU_LD=$LD_LIBRARY_PATH
 # export LD_LIBRARY_PATH=/usr/lib64/atlas:$LD_LIBRARY_PATH
 # ldd gsl_dgemm_ATLAS > ATLASldd.log
 # ./gsl_dgemm_ATLAS ATLAS.dat 32 4096 32
@@ -31,11 +31,15 @@ ldd gsl_dgemm_PSBLAS > PSBLASldd.log
 # ldd gsl_dgemm_OpenBLAS64 > OpenBLAS64ldd.log
 # ./gsl_dgemm_OpenBLAS64 OpenBLAS64.dat 32 4096 32
 #9
-# export LD_LIBRARY_PATH=/opt/BLIS/sblis/lib:$LD_LIBRARY_PATH
-# ldd gsl_dgemm_BLIS > BLISldd.out
-# ./gsl_dgemm_BLIS BLIS.dat 32 4096 32
-# export LD_LIBRARY_PATH=$MEU_LD
+ldd gsl_dgemm_BLIS > BLISldd.out
+./gsl_dgemm_BLIS BLIS.dat 32 4096 32
 #10
+ldd gsl_dgemm_BLIS64 > BLIS64ldd.out
+./gsl_dgemm_BLIS64 > BLIS64.dat
+
+
+
+
 #ldd gsl_dgemm_MKL > MKLldd.log
 #./gsl_dgemm_MKL MKL.dat 32 4096 32
 #11

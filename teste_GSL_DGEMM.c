@@ -103,7 +103,7 @@ int main( int argc, char** argv ){
 		printf("median: %.4lf\n", gflop/gsl_rstat_median(rstat_t));
 		printf("rms: %.4lf\n", gflop/gsl_rstat_rms(rstat_t));
 		if (matSize == iSize) //print dataframe head
-			fprintf(desemp, "matSize, Size, Mean, Variance, Largest, Smallest, Median, SD, SD_Mean, Skew, RMS, Kurtosis");
+			fprintf(desemp, "matSize,Size,Mean,Variance,Largest,Smallest,Median,SD,SD_Mean,Skew,RMS,Kurtosis\n");
 		
 		// col 0
 		fprintf(desemp, "%d, ", matSize);

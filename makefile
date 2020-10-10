@@ -1,17 +1,34 @@
 
 CC = g++
-CFLAGS = -O3 -Wall -fopenmp
+CFLAGS = -O2 -Wall -fopenmp
 
-all: 	gsl_dgemm_BLAS gsl_dgemm_BLAS64 gsl_dgemm_GSLCBLAS gsl_dgemm_PSBLAS \
-			gsl_dgemm_ATLAS gsl_dgemm_ATLASi2 \
-			gsl_dgemm_OpenBLAS gsl_dgemm_OpenBLAS64 gsl_dgemm_BLIS gsl_dgemm_MKL\
-			gsl_dgemm_ATLASt gsl_dgemm_ATLASi2t \
-			gsl_dgemm_OpenBLASomp gsl_dgemm_OpenBLAS64omp\
-			gsl_dgemm_OpenBLASpth gsl_dgemm_OpenBLAS64pth\
-			gsl_dgemm_BLISomp gsl_dgemm_BLISpth gsl_dgemm_MKLt\
-			gsl_dgemm_MKLMPI gsl_dgemm_BLISMPI
+all: my_dgemm my_dgemmO1 my_dgemmO2 my_dgemmO3\ 	
+	gsl_dgemm_BLAS gsl_dgemm_BLAS64\ 
+	gsl_dgemm_GSLCBLAS gsl_dgemm_PSBLAS \
+	gsl_dgemm_ATLAS gsl_dgemm_ATLASi2 \
+	gsl_dgemm_OpenBLAS gsl_dgemm_OpenBLAS64\ 
+	gsl_dgemm_BLIS gsl_dgemm_BLIS64\
+	gsl_dgemm_MKL\
+	gsl_dgemm_ATLASt gsl_dgemm_ATLASi2t \
+	gsl_dgemm_OpenBLASomp gsl_dgemm_OpenBLAS64omp\
+	gsl_dgemm_OpenBLASpth gsl_dgemm_OpenBLAS64pth\
+	gsl_dgemm_BLISomp gsl_dgemm_BLISpth gsl_dgemm_MKLt\
+	gsl_dgemm_MKLMPI gsl_dgemm_BLISMPI
 
 rasp: gsl_dgemm_BLAS gsl_dgemm_OpenBLAS gsl_dgemm_BLIS
+
+#my_dgemm
+my_dgemm: teste_DGEMM.c
+	$(CC) -Wall -fopenmp -o my_dgemm -lgsl -lcblas teste_DGEMM.c
+
+my_dgemmO1: teste_DGEMM.c
+	$(CC) -O1 -Wall -fopenmp -o my_dgemmO1 -lgsl -lcblas teste_DGEMM.c 
+
+my_dgemmO2: teste_DGEMM.c
+	$(CC) -O2 -Wall -fopenmp -o my_dgemmO2 -lgsl -lcblas teste_DGEMM.c  
+
+my_dgemmO3: teste_DGEMM.c
+	$(CC) -O3 -Wall -fopenmp -o my_dgemmO3 -lgsl -lcblas teste_DGEMM.c 
 
 #Implememntação direta
 teste_GSL_DGEMM.o: teste_GSL_DGEMM.c
@@ -54,7 +71,12 @@ gsl_dgemm_OpenBLAS64: teste_GSL_DGEMM.o
 #Linkando com a BLIS 09
 gsl_dgemm_BLIS: teste_GSL_DGEMM.o
 	#$(CC) $(CFLAGS) -o gsl_dgemm_BLIS -lgsl -L /usr/lib64/sblis/lib -lblis teste_GSL_DGEMM.o
-	$(CC) $(CFLAGS) -o gsl_dgemm_BLIS -lgsl -L /opt/BLIS/sblis/lib -lblis teste_GSL_DGEMM.o
+	#$(CC) $(CFLAGS) -o gsl_dgemm_BLIS -lgsl -L /opt/BLIS/sblis/lib -lblis teste_GSL_DGEMM.o
+	$(CC) $(CFLAGS) -o gsl_dgemm_BLIS -lgsl -lblis teste_GSL_DGEMM.o
+
+#Linkando com a BLIS64 10
+gsl_dgemm_BLIS64: teste_GSL_DGEMM.o
+	$(CC) $(CFLAGS) -o gsl_dgemm_BLIS64 -lgsl -lblis64 teste_GSL_DGEMM.o
 
 #Linkando com a MKL 10
 gsl_dgemm_MKL: teste_GSL_DGEMM.o
@@ -109,6 +131,7 @@ gsl_dgemm_BLISMPI: teste_GSL_DGEMM_MPI.o
 
 
 clean:
+	rm -f teste_dgemm*
 	rm -f gsl_dgemm*
 	rm -f *.o
 	rm -f *.dat
