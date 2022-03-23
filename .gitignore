@@ -1,0 +1,3 @@
+*.dat
+dgemm_test*
+*.o

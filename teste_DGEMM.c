@@ -29,7 +29,7 @@ void printTime(double sec);
 
 int main( int argc, char** argv ){
 
-    int i,j,k;
+    int k;
 
 	int matSize;
 	double start, stop, dt;
